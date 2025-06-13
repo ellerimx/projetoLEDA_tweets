@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import estrutura_dados.*;
 
-public class Tweet {
+import estrutura_dados.lista.Lista;
+import estrutura_dados.lista.NoDaLista;
+
+public class Tweet implements Comparable<Tweet>{
     
     private String target;
     private String id;
@@ -15,7 +17,6 @@ public class Tweet {
     private String user;
     private String text;
 
-    
     private String formatted_date;
     private String mentioned_person;
     private int mentioned_person_count;
@@ -49,9 +50,9 @@ public class Tweet {
         generateSplittedDates(this.formatted_date);
     }
     
-    //setters
-    public void setFormatted_date(String formated_date) {
-        this.formatted_date = formated_date;
+    // setters (mantém igual)
+    public void setFormatted_date(String formatted_date) {
+        this.formatted_date = formatted_date;
     }
     public void setMentioned_person(String mentioned_person) {
         this.mentioned_person = mentioned_person;
@@ -69,7 +70,7 @@ public class Tweet {
         this.year = ano;
     }
 
-    //getters
+    // getters (mantém igual)
     public String getText() {
         return text;
     }
@@ -107,7 +108,7 @@ public class Tweet {
         return year;
     }
 
-    //metodos para transformacao de datas
+    // métodos para transformação de datas (mantém igual)
     public String format_date(String dateString){
         SimpleDateFormat inputFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -122,12 +123,12 @@ public class Tweet {
         return null;
     }
 
-    //IMPLEMENTOU A LISTA AQUIIII PARA VERIFICAR SE TEM MENCOES E USUARIOS COM @ SUBSTITUINDO O TEXT.SPLIT("")
+    // método ajustado para usar lista genérica <String>
     public String search_mentioned_person(String text) {
-        Lista palavras = new Lista();
+        Lista<String> palavras = new Lista<>(); // lista genérica de Strings
         String palavra = "";
 
-        //ver todas as palavras do arquivo e separa assim /
+        // separa palavras manualmente (sem split)
         for(int i = 0; i < text.length(); i++){
             char c = text.charAt(i);
             if(c == ' '){
@@ -135,8 +136,7 @@ public class Tweet {
                     palavras.adicionar(palavra);
                     palavra = "";
                 }
-            } 
-            else {
+            } else {
                 palavra += c;
             }
         }
@@ -144,9 +144,10 @@ public class Tweet {
             palavras.adicionar(palavra);
         }
 
-        //aqui ele percorre a lista e verifica se tem @ e considera mencao
+        // percorre a lista para encontrar menções que começam com @ ou "
         String resultado = "";
-        NoDaLista atual = palavras.getInicio();
+        NoDaLista<String> atual = palavras.getInicio();
+
         while(atual != null){
             String w = atual.dado;
             if((w.startsWith("@") || w.startsWith("\"")) && w.length() > 1){
@@ -154,12 +155,13 @@ public class Tweet {
                 if(mencao.startsWith("@")){
                     if(!resultado.isEmpty()){
                         resultado += "/";
-                }
+                    }
                     resultado += mencao;
                 }
             }
             atual = atual.proximo;
         }
+
         return resultado.isEmpty() ? null : resultado;
     }
 
@@ -174,9 +176,22 @@ public class Tweet {
 
     public void generateSplittedDates(String date){
         String[] dates = date.split("/");
-
         setDay(Integer.parseInt(dates[0]));
         setMonth(Integer.parseInt(dates[1]));
         setYear(Integer.parseInt(dates[2]));
     }
+
+   @Override
+    public int compareTo(Tweet outro) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date d1 = sdf.parse(this.formatted_date);
+            Date d2 = sdf.parse(outro.formatted_date);
+            return d1.compareTo(d2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+        }
+
 }

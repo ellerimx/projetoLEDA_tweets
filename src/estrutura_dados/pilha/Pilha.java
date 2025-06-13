@@ -1,4 +1,4 @@
-package estrutura_dados;
+package estrutura_dados.pilha;
 import formatarTweet.*;
 
 public class Pilha{
@@ -37,5 +37,19 @@ public class Pilha{
     }
     public int tamanho() {
         return topo + 1;
+    }
+
+     // metodo que vai inverter o array usando pilha
+    public static Tweet[] inverterArray(Tweet[] array) {
+        Pilha pilha = new Pilha(array.length);
+        for (Tweet t : array) {
+            pilha.empilhar(t);
+        }
+
+        Tweet[] invertido = new Tweet[array.length];
+        for (int i = 0; i < array.length; i++) {
+            invertido[i] = pilha.desempilhar();
+        }
+        return invertido;
     }
 }

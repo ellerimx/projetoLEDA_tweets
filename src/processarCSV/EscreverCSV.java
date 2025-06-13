@@ -7,14 +7,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import estrutura_dados.fila.FilaVaziaException;
+import estrutura_dados.fila.MinhaFilaEncadeada;
 import formatarTweet.Tweet;
 
 public class EscreverCSV {
-
-    // definindo o cminho do diretorio onde esta  arquivo tweets.csv
-    public static final String DIR_TWEETS_DATABASE = "C:\\Users\\Millena\\Documents\\mirelle\\LEDA\\projetoLEDA_tweets\\src\\dataBaseTweets";
+    
     public static final String DIR_PROJECT_DATABASE = System.getProperty("user.dir") + File.separator + "src" + File.separator + "dataBaseTweets";
 
+
+    /*
     public static void write_date_file(String fileName, Tweet[] data) {
         String path = DIR_PROJECT_DATABASE + File.separator + fileName + ".csv";
 
@@ -41,6 +43,38 @@ public class EscreverCSV {
             e.printStackTrace();
         }
     }
+
+
+    */
+
+    public static void write_date_file(String fileName, MinhaFilaEncadeada<Tweet> filaTweets) throws FilaVaziaException {
+    String path = DIR_PROJECT_DATABASE + File.separator + fileName + ".csv";
+
+    try (BufferedWriter file = new BufferedWriter(new FileWriter(path))) {
+        System.out.println("Salvando data formatada...");
+        file.write("Target,ID,Date,flag,User,Text");
+        file.newLine();
+
+        while (!filaTweets.isEmpty()) {
+            Tweet tweet = filaTweets.desenfileirar();  // garante ordem de chegada
+            String line = String.format("%s,%s,%s,%s,%s,%s",
+                    tweet.getTarget(),
+                    tweet.getId(),
+                    tweet.getFormatted_date(),
+                    tweet.getFlag(),
+                    tweet.getUser(),
+                    tweet.getText());
+            file.write(line);
+            file.newLine();
+        }
+        System.out.println("arquivo com datas transformadas salvo!\n");
+
+    } catch (IOException e) {
+        System.out.println("Erro ao escrever arquivo");
+        e.printStackTrace();
+    }
+}
+
 
     public static void write_mentioned_persons_file(String fileName, Tweet[] data) {
         String pathFormattedDate = DIR_PROJECT_DATABASE + File.separator + "tweets_formated_data.csv";

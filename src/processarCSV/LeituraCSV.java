@@ -5,13 +5,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import estrutura_dados.Pilha;
+import estrutura_dados.pilha.Pilha;
 import formatarTweet.Tweet;
 
 public class LeituraCSV {
 
-    // definindo o cminho do diretorio onde esta  arquivo tweets.csv
-    public static final String DIR_TWEETS_DATABASE = "C:\\Users\\Millena\\Documents\\mirelle\\LEDA\\projetoLEDA_tweets\\src\\dataBaseTweets";
     public static final String DIR_PROJECT_DATABASE = System.getProperty("user.dir") + File.separator + "src" + File.separator + "dataBaseTweets";
 
     // definindo o tamanho do arquivo tweets
