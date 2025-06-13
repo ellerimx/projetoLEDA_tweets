@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import estrutura_dados.*;
 
 public class Tweet {
     
@@ -121,28 +122,50 @@ public class Tweet {
         return null;
     }
 
-    public String search_mentioned_person(String text){
-        String[] words = text.split(" ");
-        String mentioned = "";
+    //IMPLEMENTOU A LISTA AQUIIII PARA VERIFICAR SE TEM MENCOES E USUARIOS COM @ SUBSTITUINDO O TEXT.SPLIT("")
+    public String search_mentioned_person(String text) {
+        Lista palavras = new Lista();
+        String palavra = "";
 
-        for (int i = 0; i < words.length; i++) {
-            if ((words[i].startsWith("@") || words[i].startsWith("\"")) && words[i].length() > 1) {
-                String mention = words[i].replaceAll("[^@\\w]", ""); 
-    
-                if (mention.startsWith("@")) {
-                    if (!mentioned.isEmpty()) {
-                        mentioned += "/";
-                    }
-                    mentioned += mention;
+        //ver todas as palavras do arquivo e separa assim /
+        for(int i = 0; i < text.length(); i++){
+            char c = text.charAt(i);
+            if(c == ' '){
+                if(!palavra.isEmpty()){
+                    palavras.adicionar(palavra);
+                    palavra = "";
                 }
+            } 
+            else {
+                palavra += c;
             }
         }
-        return mentioned.isEmpty() ? null : mentioned; 
+        if(!palavra.isEmpty()){
+            palavras.adicionar(palavra);
+        }
+
+        //aqui ele percorre a lista e verifica se tem @ e considera mencao
+        String resultado = "";
+        NoDaLista atual = palavras.getInicio();
+        while(atual != null){
+            String w = atual.dado;
+            if((w.startsWith("@") || w.startsWith("\"")) && w.length() > 1){
+                String mencao = w.replaceAll("[^@\\w]", "");
+                if(mencao.startsWith("@")){
+                    if(!resultado.isEmpty()){
+                        resultado += "/";
+                }
+                    resultado += mencao;
+                }
+            }
+            atual = atual.proximo;
+        }
+        return resultado.isEmpty() ? null : resultado;
     }
 
     public int count_mentioned_person(String mentioned){
         int count = 0;
-        if (mentioned != null){
+        if(mentioned != null){
             String[] person = mentioned.split("/");
             count = person.length;
         }
@@ -156,5 +179,4 @@ public class Tweet {
         setMonth(Integer.parseInt(dates[1]));
         setYear(Integer.parseInt(dates[2]));
     }
-
 }

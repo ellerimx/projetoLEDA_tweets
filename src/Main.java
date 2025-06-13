@@ -6,25 +6,26 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import estrutura_dados.*;
 
-public class Main {
+public class Main{
     
-    // mudar o caminho do diretorio do database
-    public static final String DIR_TWEETS_DATABASE = "C:\\Users\\Mirelle\\Documents\\projetoLEDA-transformacoes-main\\src\\dataBaseTweets";
+    //mudar o caminho do diretorio do database
+    public static final String DIR_TWEETS_DATABASE = "C:\\Users\\Millena\\Documents\\mirelle\\LEDA\\projetoLEDA_tweets\\src\\dataBaseTweets";
     public static final String DIR_PROJECT_DATABASE = System.getProperty("user.dir") + File.separator + "src" + File.separator + "dataBaseTweets";
 
-    public static final int DATABASE_LENGTH = 1048575; // tamanho do total de tweets no csv
+    public static final int DATABASE_LENGTH = 1048575; //tamanho do total de tweets no csv
     
     public static void main(String[] args) throws Exception {
         Tweet[] dataBaseTweets;
 
         dataBaseTweets = extract_tweets_database(DIR_TWEETS_DATABASE);
-        System.out.println("Escrevendo os arquivos com datas transformadas...");
+        System.out.println("Escrevendo os arquivos com datas transformadas...a");
         write_date_file("tweets_formated_data", dataBaseTweets);
         write_mentioned_persons_file("tweets_mentioned_persons", dataBaseTweets);
         dataBaseTweets = null;
 
-        // ## counting sort      
+        //# counting sort      
         //campo count; medio, melhor e pior cenarios
         System.out.println("# Counting Sort | campo Count = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
@@ -39,7 +40,7 @@ public class Main {
         dataBaseTweets = null;
 
         //# heap sort
-        // campo date; medio, melhor e pior cenarios
+        //campo date; medio, melhor e pior cenarios
         System.out.println("# Heap Sort | campo Date = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
         HeapSort.sortByDate(dataBaseTweets); //medio caso
@@ -75,8 +76,8 @@ public class Main {
         write_ordened_file("tweets_mentioned_persons_user_heapSort_piorCaso", dataBaseTweets);
         dataBaseTweets = null;
 
-        // # insertion sort
-        // campo date; medio, melhor e pior cenarios
+        //# insertion sort
+        //campo date; medio, melhor e pior cenarios
         System.out.println("# Insertion Sort | campo Date = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
         InsertionSort.sortByDate(dataBaseTweets); //medio caso
@@ -112,8 +113,8 @@ public class Main {
         write_ordened_file("tweets_mentioned_persons_user_insertionSort_piorCaso", dataBaseTweets);
         dataBaseTweets = null;
 
-        // # merge sort
-        // campo date; medio, melhor e pior cenarios
+        //# merge sort
+        //campo date; medio, melhor e pior cenarios
         System.out.println("# Merge Sort | campo date = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
         MergeSort.mergeByDate(dataBaseTweets); //medio caso
@@ -125,7 +126,7 @@ public class Main {
         write_ordened_file("tweets_mentioned_persons_date_mergeSort_piorCaso", dataBaseTweets);
         dataBaseTweets = null;
         
-        // campo count; medio, melhor e pior cenarios
+        //campo count; medio, melhor e pior cenarios
         System.out.println("# Merge Sort | campo count = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
         MergeSort.mergeByMentionedCount(dataBaseTweets); //medio caso
@@ -137,7 +138,7 @@ public class Main {
         write_ordened_file("tweets_mentioned_persons_count_mergeSort_piorCaso", dataBaseTweets);
         dataBaseTweets = null;
         
-        // campo user; medio, melhor e pior cenarios
+        //campo user; medio, melhor e pior cenarios
         System.out.println("# Merge Sort | campo user = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
         MergeSort.mergeByUser(dataBaseTweets); //medio caso
@@ -149,7 +150,7 @@ public class Main {
         write_ordened_file("tweets_mentioned_persons_user_mergeSort_piorCaso", dataBaseTweets);
         dataBaseTweets = null;
 
-        // # quick sort com mediana de 3        
+        //# quick sort com mediana de 3        
         //campo date; medio, melhor e pior cenarios
         System.out.println("# Quick Sort Mediana| campo date = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
@@ -174,8 +175,8 @@ public class Main {
         write_ordened_file("tweets_mentioned_persons_count_quickSort(media)_piorCaso", dataBaseTweets);
         dataBaseTweets = null;
         
-        // quick sort 
-        // campo date; medio, melhor e pior cenarios
+        //# quick sort 
+        //campo date; medio, melhor e pior cenarios
         System.out.println("# Quick Sort | campo date = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
         QuickSort.sortByDateIterative(dataBaseTweets); //medio caso
@@ -211,7 +212,7 @@ public class Main {
         write_ordened_file("tweets_mentioned_persons_user_quickSort(iterativo)_piorCaso", dataBaseTweets);
         dataBaseTweets = null;
         
-        // # selection sort
+        //# selection sort
         //campo date; medio, melhor e pior cenarios
         System.out.println("# Selection Sort | campo date = gerando arquivos");
         dataBaseTweets = extract_database("tweets_mentioned_persons");
@@ -250,74 +251,91 @@ public class Main {
 
     }
 
+    //pilha aqui
     public static Tweet[] extract_tweets_database(String dir){
         String path = dir + File.separator + "tweets.csv";
         int lines = DATABASE_LENGTH;
         Tweet[] database = new Tweet[lines];
-        
+        Pilha pilha = new Pilha(lines);  //cria pilha com o tamanho
+
         try (BufferedReader file = new BufferedReader(new FileReader(path))){
             System.out.println("Extraindo database...");
             String line;
             int i = 0;
             while((line = file.readLine()) != null){
-                if(i > 0){ //pulando a linha incial de cabeçalho
+                if(i > 0){ //pulando a linha inicial de cabeçalho
                     String[] field =  line.split(","); //separando a linha em campos
                     Tweet tweet = new Tweet(field[0], field[1], field[2], field[3], field[4], field[5].trim());
-                    database[i-1] = tweet;
+
+                    pilha.empilhar(tweet);  //empilha o tweet em vez de inserir direto no array
                 }
                 i++;
             }
             System.out.println("Data base completa.");
-        } catch (IOException e) {
+
+            //agora desempilha para preencher o array na ordem correta
+            for(int j = lines - 1; j >= 0; j--){
+                database[j] = pilha.desempilhar();
+            }
+        } 
+        catch (IOException e) {
             System.out.println("Erro extraindo os dados");
             e.printStackTrace();
         }
         return database;
     }
 
+    //pilha aqui tbm
     public static Tweet[] extract_database(String name){
         String path = DIR_PROJECT_DATABASE + File.separator + name + ".csv";
         int lines = DATABASE_LENGTH;
         Tweet[] database = new Tweet[lines]; 
+        Pilha pilha = new Pilha(lines);  //cria pilha do tamanho do banco
 
-        try (BufferedReader file = new BufferedReader(new FileReader(path))) {
+        try(BufferedReader file = new BufferedReader(new FileReader(path))){
             String line;
             int i = 0;
-            
-            while ((line = file.readLine()) != null) {
-                if (i > 0) { 
-                    String[] field = line.split(","); // separar a linha em campos
-                    
+
+            while((line = file.readLine()) != null){
+                if(i > 0){ 
+                    String[] field = line.split(","); //separar a linha em campos
+
                     int count_mentioned_person = 0;
-                    try {
+                    try{
                         count_mentioned_person = Integer.parseInt(field[7]);
-                    } catch (NumberFormatException e) {
+                    } 
+                    catch(NumberFormatException e){
                         System.out.println("Erro ao converter numeros");
                         e.printStackTrace();
                     }
-                    
+
                     Tweet tweet = new Tweet(field[0], field[1], field[2], field[3], field[4], field[5], field[6], count_mentioned_person);
-                    database[i - 1] = tweet;
+
+                    pilha.empilhar(tweet);  //empilha o tweet em vez de colocar direto no array
                 }
                 i++;
             }
-        } catch (IOException e) {
+            //depois que leu tudo, desempilha para preencher o array na ordem correta
+            for(int j = lines - 1; j >= 0; j--){
+                database[j] = pilha.desempilhar();
+            }
+        } 
+        catch(IOException e){
             System.out.println("Erro ao extrair dados.");
             e.printStackTrace();
         }
-
         return database;
     }
 
     public static void write_date_file(String file_name, Tweet[] data){
         String path = DIR_PROJECT_DATABASE + File.separator + file_name + ".csv";
 
-        try (BufferedWriter file = new BufferedWriter(new FileWriter(path))){
-            System.out.println("SAlvando data formatada...");
+        try(BufferedWriter file = new BufferedWriter(new FileWriter(path))){
+            System.out.println("Slvando data formatada...");
 			file.write("Target,ID,Date,flag,User,Text");
             file.newLine();
 
-            for(int i = 0; i < data.length; i++) {
+            for(int i = 0; i < data.length; i++){
                 String line = String.format("%s,%s,%s,%s,%s,%s", 
                     data[i].getTarget(), 
                     data[i].getId(), 
@@ -330,7 +348,8 @@ public class Main {
                 file.newLine();
             }
             System.out.println("Formatacao da data salva.");
-        } catch (IOException e){
+        } 
+        catch(IOException e){
 			System.out.println("Erro ao escrever arquivo");
 			e.printStackTrace();
         }
@@ -340,19 +359,20 @@ public class Main {
         String path_formatted_date = DIR_PROJECT_DATABASE + File.separator + "tweets_formated_data.csv";
         String path_mentioned_persons = DIR_PROJECT_DATABASE + File.separator + file_name + ".csv";
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(path_formatted_date));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(path_mentioned_persons))) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(path_formatted_date));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(path_mentioned_persons))){
 
             System.out.println("Salvando arquivo das datas com mencoes...");
 			
 
             int i = 0;
             String line;
-            while ((line = reader.readLine()) != null) {
+            while((line = reader.readLine()) != null){
                 if(i == 0){
                     writer.write(line + ",mentioned_person,mentioned_person_count");
                     writer.newLine();
-                } else{
+                }
+                else{
                     if (i - 1 < data.length && data[i - 1] != null) {
                         writer.write(line + "," +
                                      data[i - 1].getMentioned_person() + "," +
@@ -363,7 +383,8 @@ public class Main {
                 i++;
             }
             System.out.println("Informacao salva.");
-        } catch (IOException e){
+        } 
+        catch(IOException e){
 			System.out.println("Erro ao processar arquivo.");
 			e.printStackTrace();
         }
@@ -372,12 +393,12 @@ public class Main {
     public static void write_ordened_file(String name, Tweet[] data){
         String path = DIR_PROJECT_DATABASE + File.separator + "dataBase_ordenada" + File.separator + name + ".csv";
 
-        try (BufferedWriter file = new BufferedWriter(new FileWriter(path))){
+        try(BufferedWriter file = new BufferedWriter(new FileWriter(path))){
 			file.write("Target,ID,Date,flag,User,Text,mentioned_person,mentioned_person_count");
             file.newLine();
 
             int i = 0;
-            while (i < data.length && data[i] != null) {
+            while(i < data.length && data[i] != null){
                 String line = String.format("%s,%s,%s,%s,%s,%s,%s,%d", 
                     data[i].getTarget(), 
                     data[i].getId(), 
@@ -392,7 +413,8 @@ public class Main {
                 file.newLine();
                 i++;
             }
-        } catch (IOException e){
+        } 
+        catch (IOException e){
 			System.out.println("Erro ao escrever arquivo");
 			e.printStackTrace();
         }
