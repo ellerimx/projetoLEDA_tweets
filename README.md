@@ -7,6 +7,7 @@ A partir das transformação da data, cria duas novas colunas contendo novas inf
 
 Para a segunda etapa do projeto, foi feita uma comparação com algoritmos de ordenação estudados na disciplina utilizando uma grande massa de testes. No final, houve a elaboração do relatório com os resultados obtidos.
 
+Para a terceira etapa do projeto, foram implementadas estruturas de dados conforme sua adequação ao problema proposto encontrado no código. As estruturas escolhidas foram: lista encadeada, pilha e fila, cada uma aplicada de acordo com suas características e funcionalidades específicas.
 
 ## Como rodar o código
 
@@ -40,7 +41,8 @@ __________
 
 Link com commits da primeira entrega: [print](https://drive.google.com/file/d/1hPedfjo_sTyTc6mWou9IbI_eFsN4ClZ7/view?usp=drive_link)
 
-Link do relatório: [Relatório LEDA - algoritmos de ordenação](https://drive.google.com/file/d/1FxMFbImFFEYHl5DOJU00audjLnL00plE/view?usp=sharing)
+Link do relatório Algoritmos de Ordenação: [Relatório LEDA - algoritmos de ordenação](https://drive.google.com/file/d/1FxMFbImFFEYHl5DOJU00audjLnL00plE/view?usp=sharing)
 
 Link para os arquivos CSV gerados ao executar o projeto: [Arquivos CSV e gráficos de comparação](https://drive.google.com/drive/u/1/folders/1idAhQp4O9yCKKSVamBAke2r9I88DlpBY)
 
+Link do relatório Estrutura de Dados: []
