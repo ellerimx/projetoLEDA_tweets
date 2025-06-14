@@ -1,5 +1,5 @@
 
-# Projeto LEDA - Algoritmos de ordenação (Tweets Dataset) 
+# Projeto LEDA - Algoritmos de ordenação e Estrutura de Dados (Tweets Dataset) 
 
 A primeira etapa do projeto da disciplina de Laboratório de Estrutura de Dados tem como objetivo a transformação das datas do arquivo "tweets.csv", gerando um novo CSV nomeado como "tweets_formated_data.csv".
 
@@ -45,4 +45,4 @@ Link do relatório Algoritmos de Ordenação: [Relatório LEDA - algoritmos de o
 
 Link para os arquivos CSV gerados ao executar o projeto: [Arquivos CSV e gráficos de comparação](https://drive.google.com/drive/u/1/folders/1idAhQp4O9yCKKSVamBAke2r9I88DlpBY)
 
-Link do relatório Estrutura de Dados: []
+Link do relatório Estrutura de Dados: [Relátorio LEDA - estrutura de dados]
