@@ -45,4 +45,4 @@ Link do relatório Algoritmos de Ordenação: [Relatório LEDA - algoritmos de o
 
 Link para os arquivos CSV gerados ao executar o projeto: [Arquivos CSV e gráficos de comparação](https://drive.google.com/drive/u/1/folders/1idAhQp4O9yCKKSVamBAke2r9I88DlpBY)
 
-Link do relatório Estrutura de Dados: [Relátorio LEDA - estrutura de dados]
+Link do relatório Estrutura de Dados: 
