@@ -16,8 +16,9 @@ import formatarTweet.Tweet;
 
 public class Main {
 
-    // mudar o caminho do diretorio do database
-    public static final String DIR_TWEETS_DATABASE = "C:\\Users\\Millena\\Documents\\mirelle\\LEDA\\projetoLEDA_tweets\\src\\dataBaseTweets";
+    // define o diretorio 
+    public static final String DIR_TWEETS_DATABASE = System.getProperty("user.dir") + File.separator + "src" + File.separator + "dataBaseTweets";
+
     public static final String DIR_PROJECT_DATABASE = System.getProperty("user.dir") + File.separator + "src" + File.separator + "dataBaseTweets";
     
     public static final int DATABASE_LENGTH = 1048575;
