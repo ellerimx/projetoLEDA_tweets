@@ -14,12 +14,12 @@ Para a terceira etapa do projeto, foram implementadas estruturas de dados confor
 1. Clone o repositório:
   - No terminal, execute:
      ```bash
-     git clone https://github.com/ellerimx/projetoLEDA-transformacoes.git
+     git clone https://github.com/ellerimx/projetoLEDA_tweets.git
      ```
 
    - Depois de dar o git clone, entre na página do projeto:
        ```cmd
-       cd projetoLEDA-transformacoes
+       cd projetoLEDA_tweets
        ```
 
 2. Baixe o arquivo que contém a dataBase no link: [Download do dataBase](https://drive.google.com/drive/u/1/folders/1x3Zxj89-YURgY7_dVkE1ONW_qqfSDNyb) 
@@ -38,11 +38,5 @@ Para a terceira etapa do projeto, foram implementadas estruturas de dados confor
 5. Execute o projeto na sua IDE java.
 
 __________
-
-Link com commits da primeira entrega: [print](https://drive.google.com/file/d/1hPedfjo_sTyTc6mWou9IbI_eFsN4ClZ7/view?usp=drive_link)
-
-Link do relatório Algoritmos de Ordenação: [Relatório LEDA - algoritmos de ordenação](https://drive.google.com/file/d/1FxMFbImFFEYHl5DOJU00audjLnL00plE/view?usp=sharing)
-
-Link para os arquivos CSV gerados ao executar o projeto: [Arquivos CSV e gráficos de comparação](https://drive.google.com/drive/u/1/folders/1idAhQp4O9yCKKSVamBAke2r9I88DlpBY)
 
 Link do relatório Estrutura de Dados: 
