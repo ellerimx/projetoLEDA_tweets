@@ -1,6 +1,6 @@
 package estrutura_dados.lista;
 
-public class Lista<T> {  // T é o tipo genérico
+public class Lista<T> {  
     private NoDaLista<T> inicio;
 
     public Lista(){

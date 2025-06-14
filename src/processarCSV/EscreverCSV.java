@@ -15,38 +15,6 @@ public class EscreverCSV {
     
     public static final String DIR_PROJECT_DATABASE = System.getProperty("user.dir") + File.separator + "src" + File.separator + "dataBaseTweets";
 
-
-    /*
-    public static void write_date_file(String fileName, Tweet[] data) {
-        String path = DIR_PROJECT_DATABASE + File.separator + fileName + ".csv";
-
-        try (BufferedWriter file = new BufferedWriter(new FileWriter(path))) {
-            System.out.println("Salvando data formatada...");
-            file.write("Target,ID,Date,flag,User,Text");
-            file.newLine();
-
-            for (Tweet tweet : data) {
-                String line = String.format("%s,%s,%s,%s,%s,%s",
-                        tweet.getTarget(),
-                        tweet.getId(),
-                        tweet.getFormatted_date(),
-                        tweet.getFlag(),
-                        tweet.getUser(),
-                        tweet.getText());
-                file.write(line);
-                file.newLine();
-            }
-            System.out.println("arquivo com datas transformadas salvo!\n");
-            
-        } catch (IOException e) {
-            System.out.println("Erro ao escrever arquivo");
-            e.printStackTrace();
-        }
-    }
-
-
-    */
-
     public static void write_date_file(String fileName, MinhaFilaEncadeada<Tweet> filaTweets) throws FilaVaziaException {
     String path = DIR_PROJECT_DATABASE + File.separator + fileName + ".csv";
 
