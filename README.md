@@ -27,14 +27,8 @@ O relatório feito para essa entrega está no final do README.
 2. Baixe o arquivo que contém a dataBase no link: [Download do dataBase](https://drive.google.com/drive/u/1/folders/1x3Zxj89-YURgY7_dVkE1ONW_qqfSDNyb) 
 
 3. Coloque o arquivo na pasta correta.
-   - Após o download no passo 2, mova o arquivo ``` tweets.csv ``` para a pasta ```dataBaseTweets```, que está no repositório clonado. Copie o caminho do diretório e cole no local: 
-      exemplo: ```public static final String DIR_TWEETS_DATABASE = "COPIAR CAMINHO DO DIRETÓRIO AQUI";```
-
-   ![Alt text](caminhoDiretorio.png)
-
-   obs: Garanta que para o Windows esteja com duas barras (como mostrado no print acima)
-   Para sistemas de Linux e macOS: o caminho do diretório utiliza barras simples "/".
-
+   - Após o download no passo 2, mova o arquivo ``` tweets.csv ``` para a pasta ```dataBaseTweets```, que está no repositório clonado.
+   
 4. Verifique que o arquivo e as alterações necessárias estejam corretas.
 
 5. Execute o projeto na sua IDE java.
