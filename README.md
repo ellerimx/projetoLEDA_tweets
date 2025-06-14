@@ -9,6 +9,8 @@ Para a segunda etapa do projeto, foi feita uma comparação com algoritmos de or
 
 Para a terceira etapa do projeto, foram implementadas estruturas de dados conforme sua adequação ao problema proposto encontrado no código. As estruturas escolhidas foram: lista encadeada, pilha e fila, cada uma aplicada de acordo com suas características e funcionalidades específicas.
 
+O relatório feito para essa entrega está no final do README.
+
 ## Como rodar o código
 
 1. Clone o repositório:
@@ -39,4 +41,5 @@ Para a terceira etapa do projeto, foram implementadas estruturas de dados confor
 
 __________
 
-Link do relatório Estrutura de Dados: 
+Link do relatório Estrutura de Dados: [Relatorio_Leda_UT2.pdf](https://github.com/user-attachments/files/20741131/Relatorio_Leda_UT2.pdf)
+
